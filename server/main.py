@@ -8,7 +8,7 @@ from PIL import Image
 from rembg import new_session, remove
 
 app = FastAPI()
-session = new_session("u2net")
+session = new_session("u2netp")
 
 
 # Health check endpoint (recommended for Render)
