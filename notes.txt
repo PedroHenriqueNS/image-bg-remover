@@ -1,0 +1,2 @@
+### Testing API
+curl -X POST -F "file=@C:\Users\pedro\GitHub\.treino\RemoveBackground\IMG_0652.jpg" http://localhost:8000/remove-bg/ > output.png
