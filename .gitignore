@@ -1,3 +1,38 @@
+## server
+# Byte-compiled / optimized / DLL files
+server/__pycache__/
+server/*.py[cod]
+server/*$py.class
+
+# C extensions
+server/*.so
+
+# Distribution / packaging
+server/.Python
+server/build/
+server/develop-eggs/
+server/dist/
+server/downloads/
+server/eggs/
+server/.eggs/
+server/lib/
+server/lib64/
+server/parts/
+server/sdist/
+server/var/
+server/wheels/
+server/share/python-wheels/
+server/*.egg-info/
+server/.installed.cfg
+server/*.egg
+server/MANIFEST
+
+# PyInstaller
+server/*.manifest
+server/*.spec
+
+
+## frontend
 # Logs
 */logs
 logs

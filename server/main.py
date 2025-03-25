@@ -1,6 +1,6 @@
 from fastapi import FastAPI, UploadFile, HTTPException
 from fastapi.responses import StreamingResponse
-from rembg import remove
+from rembg import remove, new_session
 from PIL import Image
 import uvicorn
 import io
@@ -8,6 +8,7 @@ import os
 
 
 app = FastAPI()
+session = new_session("u2net")
 
 
 # Health check endpoint (recommended for Render)
@@ -28,10 +29,10 @@ async def remove_bg(file: UploadFile):
         if image.mode != "RGBA":
             image = image.convert("RGBA")
         
-        processed_image = remove(image)
+        processed_image = remove(image, session=session)
 
         output_buffer = io.BytesIO()
-        processed_image.save(output_buffer, format="PNG")
+        processed_image.save(output_buffer, optimize=True,  format="PNG")
         output_buffer.seek(0)
         
         return StreamingResponse(
@@ -56,8 +57,8 @@ async def image_metadata(file: UploadFile):
         "mode": image.mode
     }
 
-# # Configure for Render
-# if __name__ == "__main__":
-#     # Render uses PORT environment variable
-#     port = int(os.environ.get("PORT", 8000))
-#     uvicorn.run(app, host="0.0.0.0", port=port)
+# Configure for Render
+if __name__ == "__main__":
+    # Render uses PORT environment variable
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run(app, host="0.0.0.0", port=port)
