@@ -15,6 +15,7 @@ app = FastAPI()
 async def health_check():
     return {"status": "healthy"}
 
+# Main endpoint
 @app.post("/remove-bg/")
 async def remove_bg(file: UploadFile):
     if not file.content_type.startswith("image/"):
@@ -43,7 +44,7 @@ async def remove_bg(file: UploadFile):
         raise HTTPException(status_code=500, detail=f"Internal error when processing image: {str(e)}")
     
 
-# Optional: Endpoint to receive and return image metadata
+# Endpoint to receive and return image metadata
 @app.post("/image-metadata/")
 async def image_metadata(file: UploadFile):
     image_data = await file.read()
@@ -55,8 +56,8 @@ async def image_metadata(file: UploadFile):
         "mode": image.mode
     }
 
-# Configure for Render
-if __name__ == "__main__":
-    # Render uses PORT environment variable
-    port = int(os.environ.get("PORT", 8000))
-    uvicorn.run(app, host="0.0.0.0", port=port)
+# # Configure for Render
+# if __name__ == "__main__":
+#     # Render uses PORT environment variable
+#     port = int(os.environ.get("PORT", 8000))
+#     uvicorn.run(app, host="0.0.0.0", port=port)
