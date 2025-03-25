@@ -1,11 +1,11 @@
-from fastapi import FastAPI, UploadFile, HTTPException
-from fastapi.responses import StreamingResponse
-from rembg import remove, new_session
-from PIL import Image
-import uvicorn
 import io
 import os
 
+import uvicorn
+from fastapi import FastAPI, HTTPException, UploadFile
+from fastapi.responses import StreamingResponse
+from PIL import Image
+from rembg import new_session, remove
 
 app = FastAPI()
 session = new_session("u2net")
@@ -15,6 +15,10 @@ session = new_session("u2net")
 @app.get("/health")
 async def health_check():
     return {"status": "healthy"}
+
+@app.get("/")
+async def hello_world():
+    return "Hello World!"
 
 # Main endpoint
 @app.post("/remove-bg/")
