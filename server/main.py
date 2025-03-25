@@ -33,11 +33,15 @@ async def remove_bg(file: UploadFile):
         if image.mode != "RGBA":
             image = image.convert("RGBA")
         
+        print("start")
         processed_image = remove(image, session=session)
-
+        print("end")
+        
+        print("buffer start")
         output_buffer = io.BytesIO()
-        processed_image.save(output_buffer, optimize=True,  format="PNG")
+        processed_image.save(output_buffer, optimize=False,  format="PNG")
         output_buffer.seek(0)
+        print("buffer end")
         
         return StreamingResponse(
             output_buffer,
