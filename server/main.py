@@ -10,6 +10,11 @@ import os
 app = FastAPI()
 
 
+# Health check endpoint (recommended for Render)
+@app.get("/health")
+async def health_check():
+    return {"status": "healthy"}
+
 @app.post("/remove-bg/")
 async def remove_bg(file: UploadFile):
     if not file.content_type.startswith("image/"):
