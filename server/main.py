@@ -25,7 +25,7 @@ async def remove_bg(file: UploadFile):
         raise HTTPException(status_code=400, detail="File must be an image.")
     
     try:
-        session = new_session("u2netp")
+        session = new_session("./u2netp.onnx")
         
         image_data = await file.read()
         image = Image.open(io.BytesIO(image_data))
