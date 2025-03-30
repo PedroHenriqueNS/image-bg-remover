@@ -8,8 +8,6 @@ from PIL import Image
 from rembg import new_session, remove
 
 app = FastAPI()
-session = new_session("u2netp")
-
 
 # Health check endpoint (recommended for Render)
 @app.get("/health")
@@ -27,6 +25,8 @@ async def remove_bg(file: UploadFile):
         raise HTTPException(status_code=400, detail="File must be an image.")
     
     try:
+        session = new_session("u2netp")
+        
         image_data = await file.read()
         image = Image.open(io.BytesIO(image_data))
         
